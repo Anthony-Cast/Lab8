@@ -1,16 +1,3 @@
-function compare(a, b) {
-    // Use toUpperCase() to ignore character casing
-    const TotalConfirmedA = a.TotalConfirmed;
-    const TotalConfirmedB = b.TotalConfirmed;
-
-    let comparison = 0;
-    if(TotalConfirmedA > TotalConfirmedB){
-        comparison = 1;
-    }else if (TotalConfirmedA < TotalConfirmedB){
-        comparison = -1;
-    }
-    return comparison;
-}
 
 $(document).ready(function () {
     $.ajax({
@@ -35,11 +22,11 @@ $(document).ready(function () {
     });
 });
 
-
+/*
 function formatDate(date) {
     // TODO
 }
-
+*/
 
 
 function tabla(data) {
@@ -55,8 +42,30 @@ function tabla(data) {
             + "<td>" + data[i].NewConfirmed + "</td>"
             + "<td>" + data[i].NewDeaths + "</td>"
             + "<td>" + data[i].NewRecovered + "</td>"
-            + "<td><button class='btn btn-primary'>" + "Ver Detalles" + "</button></td>" +
+            + "<td><a href='"+ubicacion(data[i])+"' type='button' class='btn btn-primary text-white'>" + "Ver Detalles" + "</a></td>" +
             "</tr>";
     }
     return fila;
+}
+function compare(a, b) {
+    // Use toUpperCase() to ignore character casing
+    const TotalConfirmedA = a.TotalConfirmed;
+    const TotalConfirmedB = b.TotalConfirmed;
+
+    let comparison = 0;
+    if(TotalConfirmedA > TotalConfirmedB){
+        comparison = 1;
+    }else if (TotalConfirmedA < TotalConfirmedB){
+        comparison = -1;
+    }
+    return comparison;
+}
+
+function ubicacion(dato){
+    var init="detallePais/detallePais.html?";
+    init+="name="+dato.Country+"&";
+    init+="slug="+dato.Slug+"&"
+    init+="countryCode="+dato.CountryCode;
+    return init;
+
 }
