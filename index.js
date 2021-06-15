@@ -49,9 +49,10 @@ function formatDate(date) {
 function tabla(data) {
     let fila="";
     for (var i = 0; i < data.Countries.length; i++) {
+        var index=i+1;
         fila +=
             "<tr>" +
-            "<td>" + i + "</td>"
+            "<td>" + index + "</td>"
             + "<td>" + data.Countries[i].Country + "</td>"
             + "<td>" + data.Countries[i].TotalConfirmed + "</td>"
             + "<td>" + data.Countries[i].TotalDeaths + "</td>"
