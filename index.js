@@ -1,3 +1,16 @@
+function compare(a, b) {
+    // Use toUpperCase() to ignore character casing
+    const TotalConfirmedA = a.TotalConfirmed.toUpperCase();
+    const TotalConfirmedB = b.TotalConfirmed.toUpperCase();
+
+    let comparison = 0;
+    if(TotalConfirmedA > TotalConfirmedB){
+        comparison = 1;
+    }else if (TotalConfirmedA < TotalConfirmedB){
+        comparison = -1;
+    }
+    return comparison;
+}
 
 $(document).ready(function () {
     $.ajax({
@@ -13,48 +26,26 @@ $(document).ready(function () {
         document.getElementById("totalDeaths").innerHTML=data.Global.TotalDeaths;
         document.getElementById("totalRecovered").innerHTML=data.Global.TotalRecovered;
         document.getElementById("body-paises").innerHTML=tabla(data);
+        data.Countries.sort(compare)
     }).fail(function (err) {
         console.log(err);
         alert("ocurrió un error al cargar la página");
     });
 });
 
-/*function compare(a, b) {
-    // Use toUpperCase() to ignore character casing
-    const TotalConfirmedA = a.TotalConfirmed.toUpperCase();
-    const TotalConfirmedB = b.TotalConfirmed.toUpperCase();
-
-    let comparison = 0;
-    if(TotalConfirmedA > TotalConfirmedB){
-        comparison = 1;
-    }else if (TotalConfirmedA < TotalConfirmedB){
-        comparison = -1;
-    }
-    return comparison;
-}
-
-Countries.sort(compare);*/
 
 function formatDate(date) {
     // TODO
 }
-function compare(a, b) {
-    // Use toUpperCase() to ignore character casing
-    // TODO
-}
-function ordenarAsc(p_array_json, p_key) {
-    p_array_json.sort(function (a, b) {
-        return a[p_key] > b[p_key];
-    });
-}
+
+
+
 function tabla(data) {
-    var dataNew=ordenarAsc(data.Countries,"TotalConfirmed");
     let fila="";
-    for (var i = 0; i < dataNew.length; i++) {
-        var index=i+1;
+    for (var i = 0; i < data.Countries.length; i++) {
         fila +=
             "<tr>" +
-            "<td>" + index + "</td>"
+            "<td>" + (i + 1) + "</td>"
             + "<td>" + data.Countries[i].Country + "</td>"
             + "<td>" + data.Countries[i].TotalConfirmed + "</td>"
             + "<td>" + data.Countries[i].TotalDeaths + "</td>"
@@ -62,7 +53,7 @@ function tabla(data) {
             + "<td>" + data.Countries[i].NewConfirmed + "</td>"
             + "<td>" + data.Countries[i].NewDeaths + "</td>"
             + "<td>" + data.Countries[i].NewRecovered + "</td>"
-            + "<td><button th:hre='@{}' class='btn btn-primary'>" + "Ver Detalles" + "</button></td>" +
+            + "<td><button class='btn-primary'>" + "Ver Detalles" + "</button></td>" +
             "</tr>";
     }
     return fila;
