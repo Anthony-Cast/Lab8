@@ -11,39 +11,13 @@ $(document).ready(function () {
         document.getElementById("newRecovered").innerHTML=data.Global.NewRecovered;
         document.getElementById("totalConfirmed").innerHTML=data.Global.TotalConfirmed;
         document.getElementById("totalDeaths").innerHTML=data.Global.TotalDeaths;
-        document.getElementById("totalRecovered").innerHTML=data.Global.TotalRecovered
+        document.getElementById("totalRecovered").innerHTML=data.Global.TotalRecovered;
+        document.getElementById("body-paises").innerHTML=tabla(data);
     }).fail(function (err) {
         console.log(err);
         alert("ocurrió un error al cargar la página");
     });
 });
-
-
-$(document).ready(function (){
-    $.ajax({
-    method: "GET",
-    datatype: "json",
-    headers: {"api-key": "3228be12-fff7-46e0-8661-01bd7b3fc190"},
-    url: "https://api.covid19api.com/summary"
-}).done(function(data1){
-    if(data1.estado === "ok"){
-        var listaPaises = data1.Countries;
-        var contentHtml = "";
-        $.each(listaPaises, function(i, pais){
-            contentHtml += "<tr>";
-            contentHtml += "<td>" + (i + 1) + "<td>";
-            contentHtml += "<td>" + pais.Country + "</td>";
-            contentHtml += "<td>" + pais.NewConfirmed + "</td>";
-            contentHtml += "<td>" + pais.NewDeaths + "</td>";
-            contentHtml += "<td>" + pais.NewRecovered + "</td>";
-            contentHtml += "<td>" + pais.TotalConfirmed + "</td>";
-            contentHtml += "<td>" + pais.TotalDeaths + "</td>";
-            contentHtml += "<td>" + pais.TotalRecovered + "</td>";
-            contentHtml += "<tr>";
-        });
-        $("#body-paises").html(contentHtml);
-    }
-})})
 
 /*function compare(a, b) {
     // Use toUpperCase() to ignore character casing
@@ -71,4 +45,22 @@ function compare(a, b) {
 
 function formatDate(date) {
     // TODO
+}
+function tabla(data) {
+    let fila="";
+    for (var i = 0; i < data.Countries.length; i++) {
+        fila +=
+            "<tr>" +
+            "<td>" + i + "</td>"
+            + "<td>" + data.Countries[i].Country + "</td>"
+            + "<td>" + data.Countries[i].TotalConfirmed + "</td>"
+            + "<td>" + data.Countries[i].TotalDeaths + "</td>"
+            + "<td>" + data.Countries[i].TotalRecovered + "</td>"
+            + "<td>" + data.Countries[i].NewConfirmed + "</td>"
+            + "<td>" + data.Countries[i].NewDeaths + "</td>"
+            + "<td>" + data.Countries[i].NewRecovered + "</td>"
+            + "<td><button class='btn-primary'>" + "Ver Detalles" + "</button></td>" +
+            "</tr>";
+    }
+    return fila;
 }
