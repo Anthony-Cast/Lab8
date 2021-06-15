@@ -53,7 +53,7 @@ function tabla(data) {
             + "<td>" + data.Countries[i].NewConfirmed + "</td>"
             + "<td>" + data.Countries[i].NewDeaths + "</td>"
             + "<td>" + data.Countries[i].NewRecovered + "</td>"
-            + "<td><button class='btn-primary'>" + "Ver Detalles" + "</button></td>" +
+            + "<td><button class='btn btn-primary'>" + "Ver Detalles" + "</button></td>" +
             "</tr>";
     }
     return fila;
