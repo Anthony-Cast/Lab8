@@ -8,7 +8,7 @@ const countryCode = urlParams.get('countryCode');
 const slug = urlParams.get('slug');
 
 $(document).ready(function () {
-    // const caseCovid = 'confimed';
+    const caseCovid = 'confimed';
     var imagen = urlFlags + countryCode + "/flat/64.png";
     $("#titulo").html('Resumen del país' +" " +"<img src='" + imagen + "' >" );
 
@@ -51,7 +51,7 @@ function obtenerDataPais() {
     $.ajax({
         method: "GET",
         datatype: "json",
-        url: "https://api.covid19api.com/total/dayone/country/" + slug + "/status/" + caseCovid
+        url: urlDiaUno + slug + "/status/" + caseCovid
     }).done(function (data) {
         //TODO
     }).fail(function (err) {
