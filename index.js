@@ -1,5 +1,5 @@
-
 $(document).ready(function () {
+    $("#titulo-resumen-global").append(dateNow());
     $.ajax({
         method: "GET",
         datatype: "json",
@@ -22,13 +22,6 @@ $(document).ready(function () {
     });
 });
 
-/*
-function formatDate(date) {
-    // TODO
-}
-*/
-
-
 function tabla(data) {
     let fila="";
     for (var i = 0; i < data.length; i++) {
@@ -47,6 +40,7 @@ function tabla(data) {
     }
     return fila;
 }
+
 function compare(a, b) {
     // Use toUpperCase() to ignore character casing
     const TotalConfirmedA = a.TotalConfirmed;
@@ -59,6 +53,14 @@ function compare(a, b) {
         comparison = -1;
     }
     return comparison;
+}
+
+function dateNow() {
+    var d = new Date();
+    const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+    const mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
+    const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
+    return `${ye}/${mo}/${da}`;
 }
 
 function ubicacion(dato){
