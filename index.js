@@ -67,7 +67,8 @@ function ubicacion(dato){
     var init="detallePais/detallePais.html?";
     init+="name="+dato.Country+"&";
     init+="slug="+dato.Slug+"&"
-    init+="countryCode="+dato.CountryCode;
+    init+="countryCode="+dato.CountryCode+"&";
+    init+="caseCovid="+"confirmed";
     return init;
 
 }
