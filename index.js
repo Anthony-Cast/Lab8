@@ -45,7 +45,7 @@ function tabla(data) {
     for (var i = 0; i < data.Countries.length; i++) {
         fila +=
             "<tr>" +
-            "<td>" + i + "</td>"
+            "<td>" + (i + 1) + "</td>"
             + "<td>" + data.Countries[i].Country + "</td>"
             + "<td>" + data.Countries[i].TotalConfirmed + "</td>"
             + "<td>" + data.Countries[i].TotalDeaths + "</td>"
