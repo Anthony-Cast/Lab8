@@ -42,13 +42,15 @@ function compare(a, b) {
     // Use toUpperCase() to ignore character casing
     // TODO
 }
-
-function formatDate(date) {
-    // TODO
+function ordenarAsc(p_array_json, p_key) {
+    p_array_json.sort(function (a, b) {
+        return a[p_key] > b[p_key];
+    });
 }
 function tabla(data) {
+    var dataNew=ordenarAsc(data.Countries,"TotalConfirmed");
     let fila="";
-    for (var i = 0; i < data.Countries.length; i++) {
+    for (var i = 0; i < dataNew.length; i++) {
         var index=i+1;
         fila +=
             "<tr>" +
@@ -60,7 +62,7 @@ function tabla(data) {
             + "<td>" + data.Countries[i].NewConfirmed + "</td>"
             + "<td>" + data.Countries[i].NewDeaths + "</td>"
             + "<td>" + data.Countries[i].NewRecovered + "</td>"
-            + "<td><button class='btn btn-primary'>" + "Ver Detalles" + "</button></td>" +
+            + "<td><button th:hre='@{}' class='btn btn-primary'>" + "Ver Detalles" + "</button></td>" +
             "</tr>";
     }
     return fila;
