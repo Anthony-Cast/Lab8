@@ -24,21 +24,7 @@ $(document).ready(function () {
         alert("ocurrió un error al cargar la página");
     });
 
-    $.ajax({method:"GET", url:urlDiaUno + slug + '/status/confirmed'})
-        .done(function(resultado){
-            console.log(resultado);
-            $.each(resultado,function(){
-                $("#casos-pais tbody").append(
-                    "<tr>"+
-                    "<td>"+formatDate(this.Date)+"</td>"+
-                    "<td>"+this.Cases+"</td>"+
-                    "</tr>"
-                );
-            });
-        })
-        .fail(function(){
-            alert("Ocurrio un error al cargar la pagina");
-        })
+    seleccionarCasos();
 });
 
 function seleccionarCasos() {
