@@ -34,9 +34,6 @@ $(document).ready(function () {
 });
 
 
-
-;
-
 function formatDate(date) {
     // TODO
 }
@@ -48,7 +45,7 @@ function tabla(data) {
     for (var i = 0; i < data.Countries.length; i++) {
         fila +=
             "<tr>" +
-            "<td>" + (i + 1) + "</td>"
+            "<td>" + i + "</td>"
             + "<td>" + data.Countries[i].Country + "</td>"
             + "<td>" + data.Countries[i].TotalConfirmed + "</td>"
             + "<td>" + data.Countries[i].TotalDeaths + "</td>"
@@ -56,7 +53,7 @@ function tabla(data) {
             + "<td>" + data.Countries[i].NewConfirmed + "</td>"
             + "<td>" + data.Countries[i].NewDeaths + "</td>"
             + "<td>" + data.Countries[i].NewRecovered + "</td>"
-            + "<td><button class='btn-primary' href='detallePais/detallePais.html'>" + "Ver Detalles" + "</button></td>" +
+            + "<td><button class='btn-primary'>" + "Ver Detalles" + "</button></td>" +
             "</tr>";
     }
     return fila;
