@@ -8,7 +8,6 @@ const countryCode = urlParams.get('countryCode');
 const slug = urlParams.get('slug');
 
 $(document).ready(function () {
-    const caseCovid = 'confimed';
     var imagen = urlFlags + countryCode + "/flat/64.png";
     $("#titulo").html('Resumen del país' +" " +"<img src='" + imagen + "' >" );
 
@@ -35,29 +34,32 @@ $(document).ready(function () {
                     "<td>"+this.Cases+"</td>"+
                     "</tr>"
                 );
-            }); })
+            });
+        })
         .fail(function(){
             alert("Ocurrio un error al cargar la pagina");
         })
-
-    obtenerDataPais();
 });
 
 function seleccionarCasos() {
-    //TODO
-}
-
-function obtenerDataPais() {
-    $.ajax({
-        method: "GET",
-        datatype: "json",
-        url: urlDiaUno + slug + "/status/" + caseCovid
-    }).done(function (data) {
-        //TODO
-    }).fail(function (err) {
-        console.log(err);
-        alert("ocurrió un error al cargar la página");
-    });
+        var casecovid = $("#caseCovid").val();
+        $.ajax({method:"GET", url: urlDiaUno + slug + '/status/' + casecovid})
+        .done(function(resultado){
+            console.log(casecovid);
+            console.log(resultado);
+            $("#body-paises tr").remove();
+            $.each(resultado,function(){
+                $("#casos-pais tbody").append(
+                    "<tr>"+
+                    "<td>"+formatDate(this.Date)+"</td>"+
+                    "<td>"+this.Cases+"</td>"+
+                    "</tr>"
+                );
+            });
+        })
+        .fail(function(){
+            alert("Ocurrio un error al cargar la pagina");
+        })
 }
 
 function formatDate(date) {
