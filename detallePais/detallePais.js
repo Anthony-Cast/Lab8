@@ -1,14 +1,16 @@
+var urlFlags = "https://www.countryflags.io/";
+var urlInfo = "https://restcountries.eu/rest/v2/alpha/";
+var urlDiaUno = "https://api.covid19api.com/total/dayone/country"
 
 const urlParams = new URLSearchParams(window.location.search);
+const nameCountry = urlParams.get('name');
 const countryCode = urlParams.get('countryCode');
-//TODO
+const slug = urlParams.get('slug');
 
 $(document).ready(function () {
     // const caseCovid = 'confimed';
-    $("#titulo").html('Resumen del país ');
-    //TODO
-    $("#bandera-div").append("<img src='"+"https://www.countryflags.io/"+countryCode+"/flat/64.png" +"'>");
-
+    var imagen = urlFlags + countryCode + "/flat/64.png";
+    $("#titulo").html('Resumen del país' +" " +"<img src='" + imagen + "' >" );
     $.ajax({
         method: "GET",
         datatype: "json",
