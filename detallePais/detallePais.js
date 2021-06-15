@@ -15,9 +15,11 @@ $(document).ready(function () {
     $.ajax({
         method: "GET",
         datatype: "json",
-        url: "https://restcountries.eu/rest/v2/alpha/" + countryCode
+        url: urlInfo + countryCode
     }).done(function (data) {
-        //TODO
+        document.getElementById("capital").innerHTML=data.capital;
+        document.getElementById("population").innerHTML=data.population;
+        document.getElementById("subregion").innerHTML=data.subregion;
     }).fail(function (err) {
         console.log(err);
         alert("ocurrió un error al cargar la página");
