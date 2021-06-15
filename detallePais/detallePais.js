@@ -9,30 +9,29 @@ const slug = urlParams.get('slug');
 
 $(document).ready(function () {
     var imagen = urlFlags + countryCode + "/flat/64.png";
+    console.log(document.getElementById("caseCovid").value);
+    $("#redirect-grafico").html(
+        '<a id="redirect-grafico" class="btn btn-primary" href="'+ubicacion(nameCountry,slug,countryCode,$("#caseCovid").val())+'" role="button">Ver Gráfico</a>');
     $("#titulo").html('Resumen del país' +" " +"<img src='" + imagen + "' >" );
-
     $.ajax({
         method: "GET",
         datatype: "json",
         url: urlInfo + countryCode
     }).done(function (data) {
-        document.getElementById("capital").innerHTML=data.capital;
-        document.getElementById("population").innerHTML=data.population;
-        document.getElementById("subregion").innerHTML=data.subregion;
+        $("#capital").text(data.capital);
+        $("#population").text(data.population);
+        $("#subregion").text(data.subregion);
+        seleccionarCasos();
     }).fail(function (err) {
         console.log(err);
         alert("ocurrió un error al cargar la página");
     });
-
-    seleccionarCasos();
 });
 
 function seleccionarCasos() {
         var casecovid = $("#caseCovid").val();
         $.ajax({method:"GET", url: urlDiaUno + slug + '/status/' + casecovid})
         .done(function(resultado){
-            console.log(casecovid);
-            console.log(resultado);
             $("#body-paises tr").remove();
             $.each(resultado,function(){
                 $("#casos-pais tbody").append(
@@ -54,4 +53,13 @@ function formatDate(date) {
     const mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
     const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
     return `${ye}/${mo}/${da}`;
+}
+
+function ubicacion(nameCountry,slug,countryCode,seleccion){
+    let init = '../grafico/graficoEvolutivo.html?';
+    init+="name="+nameCountry+"&";
+    init+="slug="+slug+"&";
+    init+="countryCode="+countryCode+"&";
+    init+="caseCovid="+seleccion;
+    return init;
 }
