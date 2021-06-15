@@ -1,12 +1,13 @@
 
 const urlParams = new URLSearchParams(window.location.search);
-const nameCountry = urlParams.get('name');
+const countryCode = urlParams.get('countryCode');
 //TODO
 
 $(document).ready(function () {
     // const caseCovid = 'confimed';
-    $("#titulo").html('Resumen del país ' + nameCountry);
+    $("#titulo").html('Resumen del país ');
     //TODO
+    $("#bandera-div").append("<img src='"+"https://www.countryflags.io/"+countryCode+"/flat/64.png" +"'>");
 
     $.ajax({
         method: "GET",
