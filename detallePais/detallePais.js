@@ -10,8 +10,6 @@ const slug = urlParams.get('slug');
 $(document).ready(function () {
     var imagen = urlFlags + countryCode + "/flat/64.png";
     console.log(document.getElementById("caseCovid").value);
-    $("#redirect-grafico").html(
-        '<a id="redirect-grafico" class="btn btn-primary" href="'+ubicacion(nameCountry,slug,countryCode,$("#caseCovid").val())+'" role="button">Ver Gráfico</a>');
     $("#titulo").html('Resumen del país' +" " +"<img src='" + imagen + "' >" );
     $.ajax({
         method: "GET",
@@ -41,6 +39,8 @@ function seleccionarCasos() {
                     "</tr>"
                 );
             });
+            $("#redirect-grafico").html(
+                '<a id="redirect-grafico" class="btn btn-primary" href="'+ubicacion(nameCountry,slug,countryCode,$("#caseCovid").val())+'" role="button">Ver Gráfico</a>');
         })
         .fail(function(){
             alert("Ocurrio un error al cargar la pagina");

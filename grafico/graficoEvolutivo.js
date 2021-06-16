@@ -80,6 +80,7 @@ function formatDate(date) {
     var fecha = new Date(numeros[0],numeros[1],numeros[2]);
     return fecha;
 }
+
 function ubicacion(nameCountry,slug,countryCode,caseCovid){
     var init="../detallePais/detallePais.html?";
     init+="name="+nameCountry+"&";
