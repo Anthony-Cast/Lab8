@@ -6,11 +6,13 @@ const urlParams = new URLSearchParams(window.location.search);
 const nameCountry = urlParams.get('name');
 const countryCode = urlParams.get('countryCode');
 const slug = urlParams.get('slug');
+const caseCOVIDdefault = urlParams.get('caseCovid');
 
 $(document).ready(function () {
     var imagen = urlFlags + countryCode + "/flat/64.png";
     console.log(document.getElementById("caseCovid").value);
     $("#titulo").html('Resumen del país' +" " +"<img src='" + imagen + "' >" );
+    $("#caseCovid").val(caseCOVIDdefault);
     $.ajax({
         method: "GET",
         datatype: "json",
@@ -19,15 +21,21 @@ $(document).ready(function () {
         $("#capital").text(data.capital);
         $("#population").text(data.population);
         $("#subregion").text(data.subregion);
-        seleccionarCasos();
+        let flag = 1;
+        seleccionarCasos(flag);
     }).fail(function (err) {
         console.log(err);
         alert("ocurrió un error al cargar la página");
     });
 });
 
-function seleccionarCasos() {
-        var casecovid = $("#caseCovid").val();
+function seleccionarCasos(flag) {
+        if(flag == 1){
+            var casecovid = caseCOVIDdefault;
+            flag = 0;
+        }else{
+            casecovid = $("#caseCovid").val();
+        }
         $.ajax({method:"GET", url: urlDiaUno + slug + '/status/' + casecovid})
         .done(function(resultado){
             $("#body-paises tr").remove();
